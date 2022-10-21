@@ -23,9 +23,9 @@ services:
       DATABASE_URL: ${DATABASE_URL}
       STATIC_ROOT: ${STATIC_ROOT:-/var/entirety/static/}
       MEDIA_ROOT: ${MEDIA_ROOT:-/var/entirety/media/}
-      ENTITIES_LOAD: ${ENTITIES_LOAD:True}
-      DEVICES_LOAD: ${DEVICES_LOAD:True}
-      NOTIFICATIONS_LOAD: ${NOTIFICATIONS_LOAD:True}
+      ENTITIES_LOAD: ${ENTITIES_LOAD:-True}
+      DEVICES_LOAD: ${DEVICES_LOAD:-True}
+      NOTIFICATIONS_LOAD: ${NOTIFICATIONS_LOAD:-True}
       CB_URL: ${CB_URL}
       QL_URL: ${QL_URL}
       IOTA_URL: ${IOTA_URL}
