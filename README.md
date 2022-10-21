@@ -50,7 +50,7 @@ Replace compose file name with the one you are using.
 
 ```bash
 docker-compose -f docker-compose.yml pull
-docker-compose -f docker-compose.yml up -d
+docker-compose -f docker-compose.yml -p entirety up -d
 ```
 
 ### Add admin user (local auth only)
