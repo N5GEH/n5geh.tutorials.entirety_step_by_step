@@ -27,7 +27,7 @@
   IOTA_URL=<iot agent url>
   QL_URL=<quantumleap url>
 
-  WEB_URL=<url under which the application will be accessible>
+  WEB_HOST=<url under which the application will be accessible>
   ```
 
 * If you're using oidc authentication also configure following settings
