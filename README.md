@@ -53,9 +53,34 @@ docker-compose -f docker-compose.yml pull
 docker-compose -f docker-compose.yml -p entirety up -d
 ```
 
+> Note: Switch from ghcr.io/n5geh/n5geh.tools.entirety:*latest* to *development* to keep track of the newest features
+
 ### Add admin user (local auth only)
 
 ```bash
 docker exec -it entirety-entirety-1 bash
 python3 manage.py createsuperuser
 ```
+
+### Configure OIDC provider (OIDC auth only)
+
+Basically, you can use an OIDC provider of your choice. However, in this tutorial we will use KeyCloak. Therefore, the
+following is a configuration guide for KeyCloak.
+
+**Create a new client** with following settings:
+
+| Setting                   | Value                                                       |
+|---------------------------|-------------------------------------------------------------|
+| **Name**                  | entirety (or any name according to your naming conventions) |
+| **Authorization Enabled** | ON                                                          |
+| **valid redirect urls**   | http(s)://your application url/oidc/callback/*              |
+
+**Add client roles** with **composite** to next role in list:
+
+* super_admin
+* server_admin
+* project_admin
+* user
+
+Either add users to roles, or create groups and assign them.
+
