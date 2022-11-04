@@ -27,7 +27,7 @@
   IOTA_URL=<iot agent url>
   QL_URL=<quantumleap url>
 
-  WEB_URL=<url under which the application will be accessible>
+  WEB_HOST=<url under which the application will be accessible>
   ```
 
 * If you're using oidc authentication also configure following settings
@@ -50,7 +50,7 @@ Replace compose file name with the one you are using.
 
 ```bash
 docker-compose -f docker-compose.yml pull
-docker-compose -f docker-compose.yml up -d
+docker-compose -f docker-compose.yml -p entirety up -d
 ```
 
 > Note: Switch from ghcr.io/n5geh/n5geh.tools.entirety:*latest* to *development* to keep track of the newest features
@@ -83,3 +83,4 @@ following is a configuration guide for KeyCloak.
 * user
 
 Either add users to roles, or create groups and assign them.
+
