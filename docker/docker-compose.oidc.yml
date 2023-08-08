@@ -4,10 +4,8 @@ services:
     image: postgres:14.5
     hostname: entirety-db
     restart: unless-stopped
-    environment:
-      - POSTGRES_DB=entirety
-      - POSTGRES_USER=entirety
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    env_file:
+      - .env
     volumes:
       - pgdata:/var/lib/postgresql
     networks:
@@ -18,24 +16,8 @@ services:
     restart: unless-stopped
     expose:
       - 8000
-    environment:
-      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
-      DATABASE_URL: ${DATABASE_URL}
-      STATIC_ROOT: ${STATIC_ROOT:-/var/entirety/static/}
-      MEDIA_ROOT: ${MEDIA_ROOT:-/var/entirety/media/}
-      ENTITIES_LOAD: ${ENTITIES_LOAD:-True}
-      DEVICES_LOAD: ${DEVICES_LOAD:-True}
-      NOTIFICATIONS_LOAD: ${NOTIFICATIONS_LOAD:-True}
-      LOCAL_AUTH: False
-      OIDC_OP_AUTHORIZATION_ENDPOINT: ${OIDC_OP_AUTHORIZATION_ENDPOINT}
-      OIDC_OP_JWKS_ENDPOINT: ${OIDC_OP_JWKS_ENDPOINT}
-      OIDC_OP_TOKEN_ENDPOINT: ${OIDC_OP_TOKEN_ENDPOINT}
-      OIDC_OP_USER_ENDPOINT: ${OIDC_OP_USER_ENDPOINT}
-      OIDC_RP_CLIENT_ID: ${OIDC_RP_CLIENT_ID}
-      OIDC_RP_CLIENT_SECRET: ${OIDC_RP_CLIENT_SECRET}
-      CB_URL: ${CB_URL}
-      QL_URL: ${QL_URL}
-      IOTA_URL: ${IOTA_URL}
+    env_file:
+      - .env
     volumes:
       - static:${STATIC_ROOT:-/var/entirety/static/}
       - media:${MEDIA_ROOT:-/var/entirety/media/}
