@@ -16,7 +16,7 @@
 ## Setup repository
 
 * Either use git or download and extract repository files
-* Provide values for environment variables in [.env file](./docker/.env)
+* Provide values for environment variables in a `.env` file, which can be copied from [.env.EXAMPLE](./docker/.env.EXAMPLE)
 
   ```shell
   DJANGO_SECRET_KEY=<random passphrase with at minimum 32 characters length>

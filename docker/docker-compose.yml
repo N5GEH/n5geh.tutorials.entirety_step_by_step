@@ -12,12 +12,16 @@ services:
       - entirety
 
   entirety:
-    image: ghcr.io/n5geh/n5geh.tools.entirety:latest
+    image: ghcr.io/n5geh/n5geh.tools.entirety:development
     restart: unless-stopped
     expose:
       - 8000
     env_file:
       - .env
+    environment:
+      - DATABASE_USER=${POSTGRES_USER:-entirety}
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD:-postgrespw}
+      - DATABASE_NAME=${POSTGRES_DB:-entirety}
     volumes:
       - static:${STATIC_ROOT:-/var/entirety/static/}
       - media:${MEDIA_ROOT:-/var/entirety/media/}
