@@ -57,6 +57,7 @@ docker-compose -f docker-compose.yml -p entirety up -d
 
 ### Add admin user (local auth only)
 
+Normally, an admin user should already be created with user name: "**admin**" and password: "**admin**". If that is not the case, you can still create new admin user via:
 ```bash
 docker exec -it entirety-entirety-1 bash
 python3 manage.py createsuperuser
