@@ -16,18 +16,28 @@
 ## Setup repository
 
 * Either use git or download and extract repository files
+  ```bash
+  git clone https://github.com/N5GEH/n5geh.tutorials.entirety_step_by_step.git
+  cd n5geh.tutorials.entirety_step_by_step.git
+  ```
 * Provide values for environment variables in a `.env` file, which can be copied from [.env.EXAMPLE](./docker/.env.EXAMPLE)
 
   ```shell
-  DJANGO_SECRET_KEY=<random passphrase with at minimum 32 characters length>
-  POSTGRES_PASSWORD=<database password>
-  DATABASE_URL=postgres://entirety:<database password again>@entirety-db:5432/entirety
+  # Database setup
+  POSTGRES_DB=<database name, default: entirety>
+  POSTGRES_USER=<database user, default: entirety>
+  POSTGRES_PASSWORD=<database password, default: postgrespw>
+  DATABASE_HOST=<database host, default: entirety-db>
+  DATABASE_PORT=<database port, default: 5432>
 
+  ...
+
+  # FIWARE
   CB_URL=<orion context broker url>
   IOTA_URL=<iot agent url>
   QL_URL=<quantumleap url>
 
-  WEB_HOST=<url under which the application will be accessible>
+  WEB_HOST=<host name or IP, under which the application will be accessible>
   ```
 
 * If you're using oidc authentication also configure following settings
@@ -52,7 +62,7 @@ Replace compose file name with the one you are using.
 docker-compose -f docker-compose.yml pull
 docker-compose -f docker-compose.yml -p entirety up -d
 ```
-
+After a few seconds, entirety should be accessible via **http://< host >:80**, for example [http://localhost:80](http://localhost:80)
 > Note: Switch from ghcr.io/n5geh/n5geh.tools.entirety:*latest* to *development* to keep track of the newest features
 
 ### Add admin user (local auth only)
