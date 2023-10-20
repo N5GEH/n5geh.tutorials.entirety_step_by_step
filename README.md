@@ -19,9 +19,9 @@
   ```bash
   git clone https://github.com/N5GEH/n5geh.tutorials.entirety_step_by_step.git
   cd n5geh.tutorials.entirety_step_by_step
+  cd docker
   ```
-* Provide values for environment variables in a `.env` file, which can be copied from [.env.EXAMPLE](./docker/.env.EXAMPLE)
-
+* In current folder (n5geh.tutorials.entirety_step_by_step/docker) create a `.env` file, which can be copied from [.env.EXAMPLE](./docker/.env.EXAMPLE). Following environment variables must be given correctly. Default values can be used for testing purposes.
   ```shell
   # Database setup
   POSTGRES_DB=<database name, default: entirety>
@@ -59,11 +59,18 @@
 Replace compose file name with the one you are using.
 
 ```bash
-docker-compose -f docker-compose.yml pull
-docker-compose -f docker-compose.yml -p entirety up -d
+docker compose -f docker-compose.yml pull
+docker compose -f docker-compose.yml -p entirety up -d
 ```
 After a few seconds, entirety should be accessible via **http://< host >:80**, for example [http://localhost:80](http://localhost:80)
-> Note: Switch from ghcr.io/n5geh/n5geh.tools.entirety:*latest* to *development* to keep track of the newest features
+> Note: Switch from ghcr.io/n5geh/n5geh.tools.entirety:*latest* to *development* to keep track of the newest features.
+>
+> If you are using ghcr (GitHub Container Registry) for the first time, you need to first sign in to the `ghcr.io`
+> ```bash
+> export CR_PAT=TOKEN
+> echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
+> ```
+> `TOKEN` (classic [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)) and `USERNAME` must be replaced with yours. Check [here](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-with-a-personal-access-token-classic) for more information.
 
 ### Add admin user (local auth only)
 
