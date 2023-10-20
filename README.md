@@ -18,7 +18,7 @@
 * Either use git or download and extract repository files
   ```bash
   git clone https://github.com/N5GEH/n5geh.tutorials.entirety_step_by_step.git
-  cd n5geh.tutorials.entirety_step_by_step.git
+  cd n5geh.tutorials.entirety_step_by_step
   ```
 * Provide values for environment variables in a `.env` file, which can be copied from [.env.EXAMPLE](./docker/.env.EXAMPLE)
 
