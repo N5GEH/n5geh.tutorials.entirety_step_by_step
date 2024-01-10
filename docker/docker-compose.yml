@@ -6,6 +6,10 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-entirety}
+      - POSTGRES_USER=${POSTGRES_USER:-entirety}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgrespw}
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
@@ -22,6 +26,8 @@ services:
       - DATABASE_USER=${POSTGRES_USER:-entirety}
       - DATABASE_PASSWORD=${POSTGRES_PASSWORD:-postgrespw}
       - DATABASE_NAME=${POSTGRES_DB:-entirety}
+      - DATABASE_HOST=${POSTGRES_DB:-entirety-db}
+      - DATABASE_PORT=${POSTGRES_DB:-5432}
     volumes:
       - static:${STATIC_ROOT:-/var/entirety/static/}
       - media:${MEDIA_ROOT:-/var/entirety/media/}
