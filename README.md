@@ -40,19 +40,27 @@
   WEB_HOST=<host name or IP, under which the application will be accessible>
   ```
 
-* If you're using oidc authentication also configure following settings
+* If you're using OpenID Connect (OIDC) authentication also configure following settings.
 
   ```shell
-  OIDC_OP_AUTHORIZATION_ENDPOINT=https://<KeyCloak instance>/auth/realms/<realm name>/protocol/openid-connect/auth
-  OIDC_OP_JWKS_ENDPOINT=https://<KeyCloak instance>/auth/realms/<realm name>/protocol/openid-connect/certs
-  OIDC_OP_TOKEN_ENDPOINT=https://<KeyCloak instance>/auth/realms/<realm name>/protocol/openid-connect/token
-  OIDC_OP_USER_ENDPOINT=https://<KeyCloak instance>/auth/realms/<realm name>/protocol/openid-connect/userinfo
+  # communication settings with the OIDC provider
+  OIDC_OP_AUTHORIZATION_ENDPOINT=https://<keycloak instance>/auth/realms/<realm name>/protocol/openid-connect/auth
+  OIDC_OP_JWKS_ENDPOINT=https://<keycloak instance>/auth/realms/<realm name>/protocol/openid-connect/certs
+  OIDC_OP_TOKEN_ENDPOINT=https://<keycloak instance>/auth/realms/<realm name>/protocol/openid-connect/token
+  OIDC_OP_USER_ENDPOINT=https://<keycloak instance>/auth/realms/<realm name>/protocol/openid-connect/userinfo
   OIDC_RP_CLIENT_ID=<oidc client id>
   OIDC_RP_CLIENT_SECRET=<oidc client secret>
+
+  # roles
+  OIDC_PROJECT_ADMIN_ROLE=<project admin role>
+  OIDC_SERVER_ADMIN_ROLE=<server admin role>
+  OIDC_SUPER_ADMIN_ROLE=<super admin role>
+  OIDC_USER_ROLE=<user role>
   ```
 
 * For a full list of configuration options
-  see [settings](https://github.com/N5GEH/n5geh.tools.entirety/blob/development/docs/SETTINGS.md)
+  see [settings](https://github.com/N5GEH/n5geh.tools.entirety/blob/development/docs/SETTINGS.md).
+* See [below](#configure-oidc-provider-oidc-auth-only) how to configure the client in the OIDC provider.
 
 ## Run the stack
 
@@ -82,23 +90,46 @@ python3 manage.py createsuperuser
 
 ### Configure OIDC provider (OIDC auth only)
 
-Basically, you can use an OIDC provider of your choice. However, in this tutorial we will use KeyCloak. Therefore, the
-following is a configuration guide for KeyCloak.
+Basically, you can use an OIDC provider of your choice. However, in this tutorial we will use keycloak (version 23.0.3). Therefore, the
+following is a configuration guide for keycloak.
 
 **Create a new client** with following settings:
 
 | Setting                   | Value                                                       |
 |---------------------------|-------------------------------------------------------------|
 | **Name**                  | entirety (or any name according to your naming conventions) |
-| **Authorization Enabled** | ON                                                          |
+| **Client type** | OpenID Connect  
+| **Authentication flow** | Standard flow                                                          |
 | **valid redirect urls**   | http(s)://your application url/oidc/callback/*              |
 
-**Add client roles** with **composite** to next role in list:
+After creating the client, you should be in the client menu of the just created client. Here, navigate to the **roles tab** and create four roles:
 
 * super_admin
 * server_admin
 * project_admin
 * user
 
-Either add users to roles, or create groups and assign them.
+The names of the roles are not important as such. Yet, it makes sense to give them a meaningful name. Additionally, they need to match with the value of the variables set in the environment file earlier, e. g. "OIDC_PROJECT_ADMIN_ROLE=project_admin".
+We recommend to make the rules **composite**. This means that a user having the role project_admin will also have the user, a user being server_admin will have project_admin and user roles assigned. ![Create roles](/figures/roles-composite.png)
+
+The client roles tab should look like this. ![Client role tab](/figures/roles-tab.PNG)
+
+Navigate to the **Client scopes** tab and click on the dedicated scope. Since we named our client, entirety, the cope is called **entirety-dedicated**.
+Click on **Add mapper** -> **From predefined mappers** and choose **client roles** and click **Add**.
+
+Make sure the scope settings match with the following table.
+
+| Setting                   | Value                                                       |
+|---------------------------|-------------------------------------------------------------|
+| **Mapper type**                  | User Client Role 
+| **Name** | client roles  
+| **Client ID** | the ID you gave your client, e. g. entirety
+| **Multivalued** | On
+| **Token Claim Name** | ${client_id}.roles (this is the path in which the roles will be put in the tokens)
+| **Claim JSON Type** | String
+| **Add to ID token** | On
+| **Add to access token** | On
+| **Add to userinfo** | On
+
+Now, you can assign the created roles to your users. The meaning of the roles is described [here](https://github.com/N5GEH/n5geh.tools.entirety/blob/2705067e1ca8a3735b807c1d8170e0d7e67a7942/docs/SETTINGS.md).
 
