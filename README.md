@@ -109,12 +109,12 @@ After creating the client, you should be in the client menu of the just created 
 * project_admin
 * user
 
-The names of the roles are not important as such. Yet, it makes sense to give them a meaningful name. Additionally, they need to match with the value of the variables set in the environment file earlier, e. g. "OIDC_PROJECT_ADMIN_ROLE=project_admin".
-We recommend to make the rules **composite**. This means that a user having the role project_admin will also have the user, a user being server_admin will have project_admin and user roles assigned. ![Create roles](/figures/roles-composite.png)
+The names of the roles are not important as such. Yet, it makes sense to give them a meaningful name. Additionally, they need to match with the value of the variables set in the environment file earlier, e.g. "OIDC_PROJECT_ADMIN_ROLE=project_admin".
+We recommend to make the rules **composite**. This means that a user having the role project_admin will also have the user role, a user being server_admin will have project_admin and user roles assigned. ![Create roles](/figures/roles-composite.png)
 
 The client roles tab should look like this. ![Client role tab](/figures/roles-tab.PNG)
 
-Navigate to the **Client scopes** tab and click on the dedicated scope. Since we named our client, entirety, the cope is called **entirety-dedicated**.
+Navigate to the **Client scopes** tab and click on the dedicated scope. Since we named our client, entirety, the scope is called **entirety-dedicated**.
 Click on **Add mapper** -> **From predefined mappers** and choose **client roles** and click **Add**.
 
 Make sure the scope settings match with the following table.
