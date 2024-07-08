@@ -22,6 +22,7 @@
   cd docker
   ```
 * In current folder (n5geh.tutorials.entirety_step_by_step/docker) create a `.env` file, which can be copied from [.env.EXAMPLE](./docker/.env.EXAMPLE). Following environment variables must be given correctly. Default values can be used for testing purposes.
+> **Note:** the field marked with "<...>" must be modified. "< >" should not be left in `.env`. For example for POSTGRES_DB, the correct default setting is `POSTGRES_DB=entirety`
   ```shell
   # Database setup
   POSTGRES_DB=<database name, default: entirety>
