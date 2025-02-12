@@ -67,6 +67,9 @@ services:
       # - OIDC_PROJECT_ADMIN_ROLE=${OIDC_PROJECT_ADMIN_ROLE}
       # - OIDC_USER_ROLE=${OIDC_USER_ROLE}
       # - OIDC_TOKEN_ROLE_PATH=${OIDC_TOKEN_ROLE_PATH}
+      - LOGIN_URL=/
+      - LOGIN_REDIRECT_URL=/
+      - LOGOUT_REDIRECT_URL=/
       - CB_URL=${CB_URL:-http://orion:1026}
       - IOTA_URL=${IOTA_URL:-http://iota:4041}
       - QL_URL=${QL_URL:-http://ql:8668}
@@ -75,7 +78,7 @@ services:
       - static:${STATIC_ROOT:-/var/entirety/static/}
       - media:${MEDIA_ROOT:-/var/entirety/media/}
     depends_on:
-      - postgres
+      - entirety-db
     networks:
       - entirety
     deploy:
