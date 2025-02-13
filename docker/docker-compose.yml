@@ -68,10 +68,12 @@ services:
       - LOGIN_URL=/
       - LOGIN_REDIRECT_URL=/
       - LOGOUT_REDIRECT_URL=/
+      - STATIC_ROOT=${STATIC_ROOT:-/var/entirety/static/}
+      - MEDIA_ROOT=${MEDIA_ROOT:-/var/entirety/media/}
       - CB_URL=${CB_URL:-http://orion:1026}
       - IOTA_URL=${IOTA_URL:-http://iota:4041}
       - QL_URL=${QL_URL:-http://ql:8668}
-      - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS:-[]}
+      # - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS:-[]}
     volumes:
       - static:${STATIC_ROOT:-/var/entirety/static/}
       - media:${MEDIA_ROOT:-/var/entirety/media/}
