@@ -65,9 +65,9 @@ services:
       # - OIDC_PROJECT_ADMIN_ROLE=${OIDC_PROJECT_ADMIN_ROLE}
       # - OIDC_USER_ROLE=${OIDC_USER_ROLE}
       # - OIDC_TOKEN_ROLE_PATH=${OIDC_TOKEN_ROLE_PATH}
-      - LOGIN_URL=/
-      - LOGIN_REDIRECT_URL=/
-      - LOGOUT_REDIRECT_URL=/
+      - LOGIN_URL=${LOGIN_URL:-/}
+      - LOGIN_REDIRECT_URL=${LOGIN_REDIRECT_URL:-/}
+      - LOGOUT_REDIRECT_URL=${LOGOUT_REDIRECT_URL:-/}
       - STATIC_ROOT=${STATIC_ROOT:-/var/entirety/static/}
       - MEDIA_ROOT=${MEDIA_ROOT:-/var/entirety/media/}
       - CB_URL=${CB_URL:-http://orion:1026}
