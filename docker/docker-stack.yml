@@ -23,6 +23,8 @@ services:
       - pgdata:/var/lib/postgresql/data
     networks:
       - entirety
+    deploy:
+      replicas: 1 # determines how many instances of orion are being started
 
   entirety:
     image: ghcr.io/n5geh/n5geh.tools.entirety:${ENTIRETY_VERSION:-development}
@@ -81,6 +83,8 @@ services:
       - entirety-db
     networks:
       - entirety
+    deploy:
+      replicas: 1
 
   nginx:
     image: nginx:${NGINX_VERSION:-1.21.3}
@@ -100,6 +104,8 @@ services:
       - entirety
     networks:
       - entirety
+    deploy:
+      replicas: 1
 
 volumes:
   static:
