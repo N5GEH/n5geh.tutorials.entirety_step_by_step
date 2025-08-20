@@ -103,7 +103,7 @@ following is a configuration guide for keycloak.
 | **Authentication flow** | Standard flow                                                          |
 | **valid redirect urls**   | http(s)://your application url/oidc/callback/*              |
 
-> **Important**: set the `OIDC_TOKEN_ROLE_PATH` variable properly to match the created client. For example, if your client is named `client_with_another_name`, you should set `OIDC_TOKEN_ROLE_PATH=&.client_with_another_name.roles`.
+> **Important**: set the `OIDC_TOKEN_ROLE_PATH` variable properly to match the created client. For example, if your client is named `client_with_another_name`, you should set `OIDC_TOKEN_ROLE_PATH=$.client_with_another_name.roles`.
 
 After creating the client, you should be in the client menu of the just created client. Here, navigate to the **roles tab** and create four roles:
 
